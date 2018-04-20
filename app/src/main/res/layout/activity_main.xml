@@ -2,8 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical" >
+              android:layout_height="match_parent" xmlns:ads="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical" android:weightSum="1">
 
     <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -16,10 +16,17 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"/>
 
-    <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/webView"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+
+    <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/webView"
+             android:layout_width="fill_parent"
+             android:layout_height="396dp" android:layout_weight="1">
     </WebView>
+
+    <com.google.android.gms.ads.AdView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id" android:id="@+id/adView2"/>
 
 </LinearLayout>

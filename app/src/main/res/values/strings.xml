@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">LanguageMap</string>
+
+    //ad(s)
+    <string name="banner_ad_unit_id">Ad Test</string>
+
+    //menu
+    <string name="languages">Languages</string>
+    <string name="statistics">Statistics</string>
+
 </resources>

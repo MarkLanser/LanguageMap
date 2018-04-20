@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- "Languages", where users can select the languages they speak -->
+    <item android:id="@+id/menu_languages"
+          android:title="@string/languages"
+          app:showAsAction="never"/>
+
+    <!-- Statistics, about their amount of people reached, etc. -->
+    <item android:id="@+id/menu_statistics"
+          android:title="@string/statistics"
+          app:showAsAction="never"/>
+
+</menu>
