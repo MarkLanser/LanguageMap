@@ -18,10 +18,7 @@ import java.util.Set;
 
 public class LanguageActivity extends AppCompatActivity {
 
-    //get all the supported languages from strings.xml and initiate empty array
-    //for handling clicked checkboxes (languages)
     String[] languages = {};
-    final ArrayList<String> clickedLanguages = new ArrayList<>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,49 +28,58 @@ public class LanguageActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
+        addCheckboxes();
+    }
+
+    public void addCheckboxes() {
         //get the linear layout for adding checkboxes dynamically
         LinearLayout layout = findViewById(R.id.LanguageLinearLayout);
+        layout.removeAllViews();
 
+        //get all the supported languages from strings.xml
         languages = getResources().getStringArray(R.array.languagesArray);
+
+        //Get the set setLanguages from shared preferences
+        Set<String> set = new HashSet<>();
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("ClickedLanguages", Context.MODE_PRIVATE);
+        final Set<String> someStringSet = pref.getStringSet("setLanguages", set);
 
         //dynamically add checkboxes to layout
         for(String s : languages) {
-            //TODO set checkbox to checked if its in the shared preferences set
-
             final CheckBox chk = new CheckBox(this);
             chk.setText(s);
+
+            //check the checkbox if the language is previously checked (and in setLanguages)
+            if (someStringSet.contains(chk.getText())) {
+                chk.setChecked(true);
+            }
 
             chk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (clickedLanguages.contains(chk.getText())) {
-                        clickedLanguages.remove(chk.getText());
-                    } else clickedLanguages.add(chk.getText().toString());
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear();
+
+                    //if the language is previously checked, remove from shared preferences,
+                    //otherwise add it
+                    if (someStringSet.contains(chk.getText())) {
+                        someStringSet.remove(chk.getText());
+                        editor.putStringSet("setLanguages", someStringSet);
+                        //debug statement (temporarily)
+                        Log.d("TEST ONCLICK", someStringSet.toString());
+                        editor.commit();
+                    } else {
+                        someStringSet.add(chk.getText().toString());
+                        editor.putStringSet("setLanguages", someStringSet);
+                        //debug statement (temporarily)
+                        Log.d("TEST ONCLICK", someStringSet.toString());
+                        editor.commit();
+                    }
                 }
             });
-
             layout.addView(chk);
         }
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        //persist the data of which language is checked in shared preferences
-        Set<String> set = new HashSet<String>(clickedLanguages);
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("ClickedLanguages", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.putStringSet("setLanguages", set);
-        editor.commit();
-
-        //TODO remove following statements when setting languages works
-        //debug log
-        Set<String> someStringSet = pref.getStringSet("setLanguages", set);
-        Log.v("test , ", someStringSet.toString());
-    }
-
 }
 
 
