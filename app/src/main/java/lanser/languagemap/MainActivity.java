@@ -14,12 +14,13 @@ public class MainActivity extends AppCompatActivity  {
 
     private WebView webView;
 
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //set the toolbar
 
+        //set the toolbar
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
