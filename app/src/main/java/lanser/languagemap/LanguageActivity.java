@@ -9,9 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,7 +39,7 @@ public class LanguageActivity extends AppCompatActivity {
         //Get the set setLanguages from shared preferences
         Set<String> set = new HashSet<>();
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("ClickedLanguages", Context.MODE_PRIVATE);
-        final Set<String> someStringSet = pref.getStringSet("setLanguages", set);
+        final Set<String> setLanguages = pref.getStringSet("setLanguages", set);
 
         //dynamically add checkboxes to layout
         for(String s : languages) {
@@ -50,7 +47,7 @@ public class LanguageActivity extends AppCompatActivity {
             chk.setText(s);
 
             //check the checkbox if the language is previously checked (and in setLanguages)
-            if (someStringSet.contains(chk.getText())) {
+            if (setLanguages.contains(chk.getText())) {
                 chk.setChecked(true);
             }
 
@@ -62,17 +59,17 @@ public class LanguageActivity extends AppCompatActivity {
 
                     //if the language is previously checked, remove from shared preferences,
                     //otherwise add it
-                    if (someStringSet.contains(chk.getText())) {
-                        someStringSet.remove(chk.getText());
-                        editor.putStringSet("setLanguages", someStringSet);
+                    if (setLanguages.contains(chk.getText())) {
+                        setLanguages.remove(chk.getText());
+                        editor.putStringSet("setLanguages", setLanguages);
                         //debug statement (temporarily)
-                        Log.d("TEST ONCLICK", someStringSet.toString());
+                        Log.d("TEST ONCLICK", setLanguages.toString());
                         editor.commit();
                     } else {
-                        someStringSet.add(chk.getText().toString());
-                        editor.putStringSet("setLanguages", someStringSet);
+                        setLanguages.add(chk.getText().toString());
+                        editor.putStringSet("setLanguages", setLanguages);
                         //debug statement (temporarily)
-                        Log.d("TEST ONCLICK", someStringSet.toString());
+                        Log.d("TEST ONCLICK", setLanguages.toString());
                         editor.commit();
                     }
                 }

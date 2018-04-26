@@ -1,36 +1,35 @@
 package controller;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import android.util.Log;
+
+import java.io.*;
+import java.net.URL;
+import java.util.HashMap;
 
 public class LanguageParserCSV {
-    //TODO fix issue of not being able to draw in mainactivity
+
     //used to parse csv files, currently manually called for seperate csv's because of above error
-    public String csvParser() {
-        String array = "[['Country', 'Language']";
+    public HashMap<String, String> parse(String language) {
+
         String line = "";
         String cvsSplitBy = ",";
+        InputStream reader = getClass().getResourceAsStream("/assets/" + language.toUpperCase() + ".csv");
+        HashMap<String, String> data = new HashMap<>();
 
-        String path = "./app/libs/csv/English.csv";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(reader))) {
             String headerLine = br.readLine();
 
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] country = line.split(cvsSplitBy);
-                array = array + ", ['" + country[0] + "', " + country[3] + "]";
+                data.put(country[0], country[3]);
         }
-            array = array + ",]";
-
-            return array;
+            return data;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return array;
+        return data;
     }
 
 }

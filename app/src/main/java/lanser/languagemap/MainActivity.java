@@ -1,6 +1,8 @@
 package lanser.languagemap;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +13,14 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import controller.LanguageController;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity  {
 
     private WebView webView;
-
-    LanguageController controller = new LanguageController();
+    private LanguageController controller = new LanguageController();
+    private Set<String> set = new HashSet<>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +33,11 @@ public class MainActivity extends AppCompatActivity  {
         //create the webview
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
+
+        //
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("ClickedLanguages", Context.MODE_PRIVATE);
+        Set<String> setLanguages = pref.getStringSet("setLanguages", set);
+        controller.getLanguagePerCountryList(setLanguages);
 
         //TODO customize following html code
         String html = "<html><head>" +
@@ -80,14 +90,16 @@ public class MainActivity extends AppCompatActivity  {
             default:
                 // The action was not recognized.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //TODO draw map again when shared preferences clickedLanguages changed
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("ClickedLanguages", Context.MODE_PRIVATE);
+        Set<String> setLanguages = pref.getStringSet("setLanguages", set);
+        controller.getLanguagePerCountryList(setLanguages);
     }
 
 }
