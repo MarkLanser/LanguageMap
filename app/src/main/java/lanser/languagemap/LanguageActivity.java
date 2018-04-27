@@ -28,6 +28,7 @@ public class LanguageActivity extends AppCompatActivity {
         addCheckboxes();
     }
 
+    /** dynamically adds checkboxes for each language available */
     public void addCheckboxes() {
         //get the linear layout for adding checkboxes dynamically
         LinearLayout layout = findViewById(R.id.LanguageLinearLayout);
@@ -41,7 +42,6 @@ public class LanguageActivity extends AppCompatActivity {
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("ClickedLanguages", Context.MODE_PRIVATE);
         final Set<String> setLanguages = pref.getStringSet("setLanguages", set);
 
-        //dynamically add checkboxes to layout
         for(String s : languages) {
             final CheckBox chk = new CheckBox(this);
             chk.setText(s);
@@ -62,13 +62,13 @@ public class LanguageActivity extends AppCompatActivity {
                     if (setLanguages.contains(chk.getText())) {
                         setLanguages.remove(chk.getText());
                         editor.putStringSet("setLanguages", setLanguages);
-                        //debug statement (temporarily)
+                        //debug statement (temporary)
                         Log.d("TEST ONCLICK", setLanguages.toString());
                         editor.commit();
                     } else {
                         setLanguages.add(chk.getText().toString());
                         editor.putStringSet("setLanguages", setLanguages);
-                        //debug statement (temporarily)
+                        //debug statement (temporary)
                         Log.d("TEST ONCLICK", setLanguages.toString());
                         editor.commit();
                     }
