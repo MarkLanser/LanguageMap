@@ -56,10 +56,9 @@ public class LanguageController {
 
     /** used to parse a language (csv file)
      * @param is
-     * @param language
      * */
-    public void parseCSV(InputStream is, String language) {
-        HashMap<String, String> data = parserCSV.parse(is, language);
+    public void parseCSV(InputStream is) {
+        HashMap<String, String> data = parserCSV.parse(is);
         getDataList(data);
     }
 

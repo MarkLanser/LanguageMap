@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity  {
             for (String l : setLanguages) {
                 //TODO fix for german and portuguese
                 String path = l.toUpperCase() + ".csv";
-                controller.parseCSV(getApplicationContext().getAssets().open(path), l);
+                controller.parseCSV(getApplicationContext().getAssets().open(path));
             }
         } catch (IOException e) {
             e.printStackTrace();

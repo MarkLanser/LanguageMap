@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class LanguageParserCSV {
 
     /** used to parse csv files (languages) */
-    public HashMap<String, String> parse(InputStream is, String language) {
+    public HashMap<String, String> parse(InputStream is) {
 
         String line = "";
         String cvsSplitBy = ",";

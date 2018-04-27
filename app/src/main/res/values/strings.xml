@@ -11,6 +11,7 @@
     //language activity
     <string-array name="languagesArray">
         <item>English</item>
+        <item>Chinese</item>
         <item>French</item>
         <item>German</item>
         <item>Portuguese</item>
