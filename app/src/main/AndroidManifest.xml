@@ -25,10 +25,12 @@
         <activity
                 android:name=".LanguageActivity"
                 android:parentActivityName=".MainActivity">
-
         </activity>
 
-
+        <activity
+                android:name=".StatisticsActivity"
+                android:parentActivityName=".MainActivity">
+        </activity>
 
     </application>
 

@@ -8,14 +8,39 @@
     <string name="languages">Languages</string>
     <string name="statistics">Statistics</string>
 
+    //main activity
+    <string-array name="regionListArray">
+        <item>World</item>
+        <item>world</item>
+        <item>Africa</item>
+        <item>002</item>
+        <item>Europe</item>
+        <item>150</item>
+        <item>America</item>
+        <item>021</item>
+        <item>South-America</item>
+        <item>005</item>
+        <item>Asia</item>
+        <item>142</item>
+        <item>Oceania</item>
+        <item>009</item>
+    </string-array>
+
     //language activity
     <string-array name="languagesArray">
         <item>English</item>
         <item>Chinese</item>
         <item>French</item>
         <item>German</item>
+        <item>Spanish</item>
         <item>Portuguese</item>
+        <item>Dutch</item>
+        <item>Arabic</item>
+        <item>Hindi</item>
     </string-array>
+
+    //statistics activity
+    <string name="reachText">You are able to reach this many people</string>
 
 
 </resources>
